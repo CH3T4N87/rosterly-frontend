@@ -1,0 +1,22 @@
+
+.khiskanaPadega a {
+    width: 70%;
+}
+.navbar-nav{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.navbar-nav > button{
+    width: 40%;
+    margin: 5px;
+}
+.navbar{
+    background-color: #343a40 !important;
+}
+.navbar-toggler-icon{
+    background-color: white;
+    border: 5px solid rgb(4, 4, 4);
+    font-size: 1.6rem;
+    border-radius: 10px;
+}

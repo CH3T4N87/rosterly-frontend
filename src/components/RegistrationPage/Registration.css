@@ -1,0 +1,30 @@
+.registration-page{
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    background-color: #495057;
+    padding-bottom: 3rem;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* text-align: cente; */
+}
+/* .registration-page > button {
+    position: absolute;
+    margin: 1rem;
+} */
+.registration-form{
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* background-color: #495057; */
+}
+.registration-form > form{
+    color: white;
+    width: 80%;
+    background-color: #212529;
+    padding: 2rem;
+    border: 2px solid white;
+    border-radius: 25px;
+}

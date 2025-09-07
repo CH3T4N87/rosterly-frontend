@@ -1,0 +1,15 @@
+.dashboard{
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    background-color: #495057;
+    padding-bottom: 2rem;
+}
+
+.students-container{
+    margin:1rem 0 1rem;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+} 
