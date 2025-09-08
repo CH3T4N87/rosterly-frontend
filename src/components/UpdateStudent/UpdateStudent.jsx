@@ -14,6 +14,21 @@ const UpdateStudent = () => {
   const [email, setEmail] = useState("");
   const [course, setCourse] = useState("");
   let [loading, setLoading] = useState(false);
+  let [courses, setCourses] = useState([]);
+
+  // fetch courses from backend
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const res = await axios.get("https://rosterly-backend.onrender.com/getCourses");
+        setCourses(res.data);
+      } catch (err) {
+        console.error("Error fetching courses:", err);
+        toast.error("Failed to load courses");
+      }
+    };
+    fetchCourses();
+  }, []);
 
   useEffect(() => {
     const fetchStudent = async () => {
@@ -68,82 +83,85 @@ const UpdateStudent = () => {
         {
           loading ? (<div >
             <h3 className='alert alert-info'>Updating...</h3>
-          </div>):(
+          </div>) : (
             <form onSubmit={handleUpdate}>
-          {/* Profile Picture */}
-          <div className="mb-3">
-            <label htmlFor="image" className="form-label">
-              Profile Picture
-            </label>
-            <input
-              type="file"
-              className="form-control"
-              id="image"
-              onChange={(e) => {
-                setPic(e.target.files[0]);
-                setPreview(URL.createObjectURL(e.target.files[0]));
-              }}
-            />
-            {preview && (
-              <img
-                src={preview}
-                alt="preview"
-                style={{ marginTop: "10px", width: "100px", borderRadius: "8px" }}
-              />
-            )}
-          </div>
+              {/* Profile Picture */}
+              <div className="mb-3">
+                <label htmlFor="image" className="form-label">
+                  Profile Picture
+                </label>
+                <input
+                  type="file"
+                  className="form-control"
+                  id="image"
+                  onChange={(e) => {
+                    setPic(e.target.files[0]);
+                    setPreview(URL.createObjectURL(e.target.files[0]));
+                  }}
+                />
+                {preview && (
+                  <img
+                    src={preview}
+                    alt="preview"
+                    style={{ marginTop: "10px", width: "100px", borderRadius: "8px" }}
+                  />
+                )}
+              </div>
 
-          {/* Name */}
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label">
-              Name
-            </label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="form-control"
-              id="name"
-            />
-          </div>
+              {/* Name */}
+              <div className="mb-3">
+                <label htmlFor="name" className="form-label">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="form-control"
+                  id="name"
+                />
+              </div>
 
-          {/* Email */}
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="form-control"
-              id="email"
-            />
-          </div>
+              {/* Email */}
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">
+                  Email
+                </label>
+                <input
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="form-control"
+                  id="email"
+                />
+              </div>
 
-          {/* Course */}
-          <div className="mb-3">
-            <label htmlFor="course" className="form-label">
-              Course
-            </label>
-            <select
-              id="course"
-              className="form-select"
-              value={course}
-              onChange={(e) => setCourse(e.target.value)}
-            >
-              <option value="">- select -</option>
-              <option value="HTML Basics">HTML Basics</option>
-              <option value="CSS Mastery">CSS Mastery</option>
-              <option value="JavaScript Pro">JavaScript Pro</option>
-              <option value="React In Depth">React In Depth</option>
-            </select>
-          </div>
+              {/* Course */}
+              <div className="mb-3">
+                <label htmlFor="course" className="form-label">
+                  Course
+                </label>
+                <select
+                  id="course"
+                  className="form-select"
+                  value={course}
+                  onChange={(e) => setCourse(e.target.value)}
+                >
+                  <option value="" disabled>
+                  - select -
+                </option>
+                {courses.map((c, idx) => (
+                  <option key={idx} value={c.courseName}>
+                    {c.courseName}
+                  </option>
+                ))}
+                </select>
+              </div>
 
-          <button type="submit" className="btn btn-warning">
-            Update
-          </button>
-        </form>
+              <button type="submit" className="btn btn-warning">
+                Update
+              </button>
+            </form>
           )
         }
       </div>

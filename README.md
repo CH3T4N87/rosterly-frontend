@@ -1,12 +1,60 @@
-# React + Vite
+# 🎓 Rosterly Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Rosterly is a student management application built with **React.js**.  
+This frontend allows users to **register students, view them, update details, and delete records**.  
+It connects with the backend server and Cloudinary for image uploads.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
+- Student Registration form with validation
+- File upload for profile picture
+- Fetch list of students from backend
+- Update & Delete functionality
+- Fetch available courses dynamically from API
+- Responsive UI with Bootstrap
+- Toast notifications for success/error states
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+- **React.js** (Frontend framework)
+- **React Router DOM** (Routing)
+- **Axios** (HTTP requests)
+- **Bootstrap 5** (UI styling)
+- **React-Toastify** (Notifications)
+
+---
+
+## ⚡ How It Works
+1. User fills the registration form.
+2. On submit:
+   - Inputs validated (name, email, course required).
+   - Image and data packed into **FormData**.
+   - Sent via `axios.post` to backend `/student/addStudent`.
+3. On success → Student stored in DB & profile image stored in Cloudinary.
+4. Dashboard fetches students from `/student/getAll` and displays them.
+5. Each student card has:
+   - Edit → Navigates to update page.
+   - Delete → Sends DELETE request.
+
+---
+
+## 🖼️ Screens
+- Hero Section with app intro.
+- Registration Page.
+- Dashboard with student cards.
+- Courses Page fetching from API.
+
+---
+
+## ⚡ Scripts
+```bash
+# install dependencies
+npm install
+
+# run dev server
+npm run dev
+
+# build for production
+npm run build

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import "./Registration.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -12,6 +12,21 @@ const Registration = () => {
   let [email, setEmail] = useState("");
   let [course, setCourse] = useState("");
   let [loading, setLoading] = useState(false);
+    let [courses, setCourses] = useState([]);
+
+    // fetch courses from backend
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const res = await axios.get("https://rosterly-backend.onrender.com/getCourses");
+        setCourses(res.data); 
+      } catch (err) {
+        console.error("Error fetching courses:", err);
+        toast.error("Failed to load courses");
+      }
+    };
+    fetchCourses();
+  }, []);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -62,7 +77,7 @@ const Registration = () => {
   return (
     <div className='registration-page'>
       <Navbar />
-   <ToastContainer position="bottom-right" autoClose={3000} />
+      <ToastContainer position="bottom-right" autoClose={3000} />
       <div className="registration-form">
         {loading ? (
           <div >
@@ -85,11 +100,14 @@ const Registration = () => {
             <div className="mb-3">
               <label htmlFor="course" className="form-label">Course</label>
               <select name="course" id="course" className='form-select' value={course} onChange={(e) => setCourse(e.target.value)}>
-                <option value="" disabled>- select -</option>
-                <option value="HTML Basics">HTML Basics</option>
-                <option value="CSS Mastery">CSS Mastery</option>
-                <option value="JavaScript Pro">JavaScript Pro</option>
-                <option value="React In Depth">React In Depth</option>
+                <option value="" disabled>
+                  - select -
+                </option>
+                {courses.map((c, idx) => (
+                  <option key={idx} value={c.courseName}>
+                    {c.courseName}
+                  </option>
+                ))}
               </select>
             </div>
 
